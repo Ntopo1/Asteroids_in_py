@@ -1,6 +1,6 @@
 import pygame
 from constants import *
-from player import Player
+import player
 
 def main():
     pygame.init()
@@ -13,12 +13,13 @@ def main():
     dt = 0
     
     # Create player instance in the middle of the screen
-    player_instance = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+    player_instance = player.Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
         screen.fill((0,0,1))
+        player_instance.update(dt)
         player_instance.draw(screen)
         pygame.display.flip()
         dt = clock.tick(60)/1000
