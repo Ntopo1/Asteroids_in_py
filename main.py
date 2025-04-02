@@ -33,6 +33,7 @@ def main():
     player_instance = player.Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     asteroid_field = AsteroidField()
 
+    # General Game Loop
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -45,6 +46,10 @@ def main():
             if player_instance.collisionsCheck(asteroid):
                 print('Game Over')
                 sys.exit()
+            for shot in shots_group:
+                if shot.collisionsCheck(asteroid):
+                    pygame.sprite.Sprite.kill(asteroid)
+                    pygame.sprite.Sprite.kill(shot)
         
 
         #Draw all objects
