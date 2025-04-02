@@ -4,6 +4,7 @@ import player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
 import sys
+from shot import Shot
 
 def main():
     pygame.init()
@@ -19,12 +20,14 @@ def main():
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
     all_asteroids = pygame.sprite.Group()
+    shots_group = pygame.sprite.Group()
 
     # Create containers
     
     player.Player.containers = (updatable, drawable)
     Asteroid.containers = (all_asteroids, updatable, drawable)
     AsteroidField.containers = (updatable,)
+    Shot.containers = (shots_group, updatable, drawable)
 
     # Create player instance in the middle of the screen
     player_instance = player.Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
@@ -43,6 +46,7 @@ def main():
                 print('Game Over')
                 sys.exit()
         
+
         #Draw all objects
         for drawable_object in drawable:
             drawable_object.draw(screen)
